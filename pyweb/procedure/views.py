@@ -31,7 +31,8 @@ def update_emp_p(request):
         # with 문장 → with 블록이 종료됐을 때, 메모리 AUTO close
         # OracleDB 접속
         with oracledb.connect("python/1234@localhost:1521/xe") as conn:
-            with conn.cursor() as cursor:
+            #                  아이디/비번@호스트:포트/DB
+            with conn.cursor() as cursor:  # 커서 → 레코드셋
                 empno = request.GET['empno']
                 cursor.callproc('mysal_p', [empno])
                 #                프로시저 호출     매개변수
@@ -47,7 +48,8 @@ def write_emp(request):
 
 
 def insert_emp(request):
+    # 폼 데이터 세팅
     emp = Emp(empno=request.POST['empno'], ename=request.POST['ename'], job=request.POST['job'],
               hiredate=request.POST['hiredate'], sal=request.POST['sal'])
-    emp.save()
+    emp.save()  # 새로운 레코드저장
     return redirect('/procedure/list_emp')

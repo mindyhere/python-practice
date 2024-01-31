@@ -16,14 +16,21 @@ def write(request):
 
 
 def insert(request):
+    # 폼 데이터 전달
+    # request.POST['변수명'] ↔ request.GET['변수명']
     book = Book(title=request.POST['title'], author=request.POST['author'], price=int(request.POST['price']),
                 amount=int(request.POST['amount']))
-    book.save()
+    book.save()  # insert 작업종료
+
+    # forward → 진행과정. 진행중
+    # redirect → 작업완료. 방향전환
     return redirect('/book')
 
 
 def edit(request):
     row = Book.objects.get(idx=request.GET['idx'])
+    # Book.objects → 전체레코드
+    # get(key) → where절 조건검색
     return render(request, 'book/edit.html', {'row': row})
 
 
