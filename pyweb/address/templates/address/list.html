@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<h2>주소록</h2>
+<a href="/">Home</a>
+<a href="write">등록</a>
+<table border="1">
+    <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>전화</th>
+        <th>이메일</th>
+        <th>주소</th>
+    </tr>
+
+    {% for row in items %}
+    <tr>
+        <td>{{row.idx}}</td>
+        <td><a href="detail?idx={{row.idx}}">{{row.name}}</a></td>
+        <!-- 쿼리스트링 : ?변수=값&변수=값 (ex. http://localhost:8000/address/detail?idx=1 ) -->
+        <td>{{row.tel}}</td>
+        <td>{{row.email}}</td>
+        <td>{{row.address}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

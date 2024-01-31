@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transaction index</title>
+</head>
+<body>
+{% if cnt > 0 %}
+    {{cnt}}건의 자료가 추가되었습니다.<br>
+    실행시간: {{runtime}}<br>
+    <a href="list">확인</a><br>
+{% endif %}
+<a href="insert">트랜잭션 처리 실행</a><br>
+<a href="/">Home</a>
+</body>
+</html>

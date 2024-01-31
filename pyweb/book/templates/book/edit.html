@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>수정/삭제</title>
+    <script>
+        function book_update(){
+            document.form1.action='update';
+            document.form1.submit();
+        }
+
+        function book_delete(){
+            if(confirm("삭제하시겠습니까?")){
+                document.form1.action='delete';
+                document.form1.submit();
+            }
+        }
+    </script>
+</head>
+<body>
+<form name="form1" method="post">
+    {%csrf_token%}
+    <table border="1" width="500px">
+        <tr>
+            <td>제목</td>
+            <td><input name="title" size="40" value="{{row.title}}"></td>
+        </tr>
+        <tr>
+            <td>저자</td>
+            <td><input name="author" value="{{row.author}}"></td>
+        </tr>
+        <td>가격</td>
+        <td><input type="number" name="price" value="{{row.price}}"></td>
+        <tr>
+            <td>수량</td>
+            <td><input type="number" name="amount" value="{{row.amount}}"></td>
+        </tr>
+        <tr align="center">
+            <td colspan="2">
+                <input type="hidden" name="idx" value="{{row.idx}}">
+                <input type="button" value="수정" onclick="book_update()">
+                <input type="button" value="삭제" onclick="book_delete()">
+                <input type="button" value="목록" onclick="location.href='/book'">
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+    <script>
+        function update(){
+            document.form1.action="update_memo"
+            document.form1.submit();
+        }
+
+        function del(){
+            if(confirm("삭제할까요?")){
+                document.form1.action="delete_memo"
+                document.form1.submit();
+                }
+        }
+    </script>
+</head>
+<body>
+<form method="post" name="form1">
+    {%csrf_token%}
+    <table border="1">
+        <tr>
+            <td>이름</td>
+            <td><input name="writer" value="{{row.writer}}"></td>
+        </tr>
+        <tr>
+            <td>날짜</td>
+            <td>{{row.post_date}}</td>
+        </tr>
+        <tr>
+            <td>메모</td>
+            <td><input name="memo" value="{{row.memo}}"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="hidden" name="idx" value="{{row.idx}}">
+                <input type="button" value="수정" onclick="update()">
+                <input type="button" value="삭제" onclick="del()">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

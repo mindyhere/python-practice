@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+    <script>
+        function update(){
+            document.form1.action="update"
+            document.form1.submit();
+        }
+
+        function del(){
+        if (confirm("삭제할까요?")){
+            document.form1.action="delete"
+            document.form1.submit();
+            }
+        }
+    </script>
+</head>
+<body>
+<h2>주소록 편집</h2>
+<form method="post" name="form1">
+    {% csrf_token%}
+    <table border="1">
+        <tr>
+            <td>이름</td>
+            <td><input name="name" value="{{addr.name}}"></td>
+        </tr>
+        <tr>
+            <td>전화</td>
+            <td><input name="tel" value="{{addr.tel}}"></td>
+        </tr>
+        <tr>
+            <td>이메일</td>
+            <td><input name="email" value="{{addr.email}}"></td>
+        </tr>
+        <tr>
+            <td>주소</td>
+            <td><input name="address" value="{{addr.address}}"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="hidden" name="idx" value="{{addr.idx}}">
+                <!-- type="hidden" → 화면에서 숨김처리 -->
+
+                <!-- 버튼클릭 시 함수 호출 -->
+                <input type="button" value="수정" onclick="update()">
+                <input type="button" value="삭제" onclick="del()">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

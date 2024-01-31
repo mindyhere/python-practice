@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>book list</title>
+</head>
+<body>
+<h2>도서목록</h2>
+등록된 도서: {{bookcount}} 권
+<input type="button" value="Home" onclick="location.href='/'">
+<input type="button" value="추가" onclick="location.href='/book/write'">
+<table border="1" width="600px">
+    <tr align="center">
+        <td>제목</td>
+        <td>저자</td>
+        <td>가격</td>
+        <td>수량</td>
+    </tr>
+    {% for book in bookList%}
+    <tr>
+        <td><a href="edit?idx={{book.idx}}">{{book.title}}</a></td>
+        <td>{{book.author}}</td>
+        <td>{{book.price}}</td>
+        <td>{{book.amount}}</td>
+    </tr>
+    {%endfor%}
+</table>
+</body>
+</html>

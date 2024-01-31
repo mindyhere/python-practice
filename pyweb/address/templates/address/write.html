@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>write</title>
+</head>
+<body>
+<h2>주소록</h2>
+<!-- csrf → Cross Site Request Forgery(사이트 간 요청 위조) -->
+<!-- action="insert" → http://localhost:8000/address/insert -->
+<form method="post" action="insert">
+    {%csrf_token%}
+    이름: <input name="name"><br>
+    전화: <input name="tel"><br>
+    메일: <input name="email"><br>
+    주소: <input name="address"><br>
+    <input type="submit" value="확인">
+</form>
+</body>
+</html>

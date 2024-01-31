@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>트랜잭션 처리</title>
+</head>
+<body>
+사원수: {{empCount}} 명
+<input type="button" value="트랜잭션 메인" onclick="location.href='/transaction'">
+<input type="button" value="Home" onclick="location.href='/'">
+
+<table border="1" width="600px">
+    <tr>
+        <td>사번</td>
+        <td>이름</td>
+        <td>부서</td>
+    </tr>
+    {% for emp in empList %}
+    <tr>
+        <td>{{emp.empno}}</td>
+        <td>{{emp.ename}}</td>
+        <td>{{emp.deptno}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
