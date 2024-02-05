@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+    <script>
+        function delete_memo(idx){
+            if(confirm("삭제하시겠습니까?")){
+                location.href="/procedure/delete_memo_p?idx="+idx;
+            }
+        }
+    </script>
+</head>
+<body>
+<a href="/procedure">프로시저 메인</a>
+<a href="/">Home</a>
+<hr>
+<h2>메모수정</h2>
+<form method="post" action="update_memo_p">
+    {%csrf_token%}
+    이름 : <input name="writer" value="{{memo.1}}"><br>
+    메모 : <input name="memo" value="{{memo.2}}"><br>
+    <input type="hidden" name="idx" value="{{memo.0}}">
+    <input type="submit" value="수정">
+</form>
+</body>
+</html>

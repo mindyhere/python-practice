@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keyword</title>
+    <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#search").keyup(function(){
+                let search=$("#search").val();
+
+                if(search.length ==0){
+                    $("#div1").css("visibility", "hidden");
+                } else {
+                    $("#div1").css("visibility", "visible");
+                    $.ajax({
+                        url:"keyword_list",
+                        data: {"search":search},
+                        success: function(txt){
+                            $("#div1").html("");
+                            for(i=0; i<txt.length; i++){
+                                $("#div1").append(txt[i]+"<br>");
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <style>
+        div { position : absolute; left:180px; top:30px; }
+    </style>
+</head>
+<body>
+키워드를 입력하세요.
+<input type="text" id="search">
+<div id="div1">검색결과 출력 영역</div>
+</body>
+</html>

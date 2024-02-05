@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memoList</title>
+    <script>
+        function delete_memo(idx){
+            if(confirm("삭제하시겠습니까?")){
+                location.href="/procedure/delete_memo_p?idx="+idx;
+            }
+        }
+    </script>
+</head>
+<body>
+<a href="/procedure">프로시저 메인</a>
+<a href="/">Home</a>
+<hr>
+<h2>한줄메모장</h2>
+<form method="post" action="insert_memo_p">
+    {% csrf_token %}
+    이름 : <input name="writer"><br>
+    메모 : <input name="memo"><br>
+    <input type="submit" value="확인">
+</form>
+{{cnt}}개의 메모가 있습니다.
+<table border="1">
+    <tr style="background-color:orange;">
+        <th>번호</th>
+        <th>이름</th>
+        <th>메모</th>
+        <th>날짜</th>
+        <th>&nbsp;</th>
+    </tr>
+    {% for row in memoList %}
+    <!-- 프로시저 → 필드명(변수) : idx(row.0), writer(1), memo(2), date(row.3) -->
+    <tr>
+        <td align="center">{{row.0}}</td>
+        <td align="center">{{row.1}}</td>
+        <td><a href="/procedure/view_memo_p?idx={{row.0}}">{{row.2}}</a></td>
+        <td>{{row.3|date:'Y-m-d G:i:s'}}</td>
+        <td>
+            <button type="button" onclick="delete_memo('{{row.0}}')">삭제</button>
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+</body>
+</html>

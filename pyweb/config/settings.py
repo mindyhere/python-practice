@@ -48,7 +48,14 @@ INSTALLED_APPS = [
     # 트랜잭션 처리 추가
     "transaction",
     # 저장프로시저 추가
-    "procedure"
+    "procedure",
+    # 회원관리 추가
+    "mymember",
+    # Ajax실습 추가
+    "ajax",
+    "debug_toolbar",
+    # 설문조사 앱추가
+    "survey",
 ]
 
 MIDDLEWARE = [
@@ -59,7 +66,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+# 디버그 주소를 허용할 IP추가
+# 허용ip         localhost
+INTERNAL_IPS = ("127.0.0.1",)
 
 ROOT_URLCONF = "config.urls"
 

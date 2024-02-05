@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>설문조사 결과</h2>
+<table border="1">
+    <tr align="center" style="background-color:orange;">
+        <th>문항</th>
+        <th>응답횟수</th>
+        <th>응답률</th>
+    </tr>
+    {% for row, ans in surveyList %}
+    <tr align="center">
+        <td>{{ans}}</td>
+        <td>{{row.sum_num}}</td>
+        <td>{{row.rate}}%</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="/">Home</a>&nbsp;&nbsp;
+<a href="/survey">Survey Home</a>
+</body>
+</html>

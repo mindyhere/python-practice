@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btnLogin").click(function(){
+            //$("#passwd"+"\n").keyup(function(){
+                let userid=$("#userid").val();
+                let passwd=$("#passwd").val();
+                let params={"userid":userid, "passwd":passwd};
+
+                $.ajax({
+                    url: "login_check",
+                    data: params,
+                    success: function(txt){
+                        $("#div1").html(txt.result);
+                        $("#btnLogin").hide();
+                        $("#btnLogout").show();
+                        $("#btnHome").show();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+아이디 : <input id="userid"><br>
+비밀번호 : <input type="password" id="passwd"><br>
+<input type="button" value="로그인" id="btnLogin">
+<input type="button" value="로그아웃" id="btnLogout" style="display:none;" onclick="location.href='/ajax/login'" >
+<input type="button" value="Home" id="btnHome" style="display:none;" onclick="location.href='/ajax/'">
+<div id="div1">결과 출력 영역</div>
+</body>
+</html>

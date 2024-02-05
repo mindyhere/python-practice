@@ -53,3 +53,67 @@ def insert_emp(request):
               hiredate=request.POST['hiredate'], sal=request.POST['sal'])
     emp.save()  # 새로운 레코드저장
     return redirect('/procedure/list_emp')
+
+
+def list_memo_p(request):
+    try:
+        with oracledb.connect("python/1234@localhost:1521/xe") as conn:
+            with conn.cursor() as cursor:
+                ref_cursor = conn.cursor()
+                cursor.callproc('memo_list_p', [ref_cursor])
+                rows = ref_cursor.fetchall()
+    except Exception as e:
+        print(e)
+    return render(request, 'procedure/list_memo_p.html', {'memoList': rows, 'cnt': len(rows)})
+
+
+def insert_memo_p(request):
+    try:
+        with oracledb.connect("python/1234@localhost:1521/xe") as conn:
+            with conn.cursor() as cursor:
+                writer = request.POST['writer']
+                memo = request.POST['memo']
+                cursor.callproc('memo_insert_p', [writer, memo])
+                conn.commit()
+    except Exception as e:
+        print(e)
+    return redirect('/procedure/list_memo_p')
+
+
+def view_memo_p(request):
+    try:
+        with oracledb.connect("python/1234@localhost:1521/xe") as conn:
+            with conn.cursor() as cursor:
+                idx = request.GET['idx']
+                ref_cursor = conn.cursor()
+                cursor.callproc('memo_view_p', [idx, ref_cursor])
+                row = ref_cursor.fetchone()
+    except Exception as e:
+        print(e)
+    return render(request, 'procedure/view_memo_p.html', {'memo': row})
+
+
+def delete_memo_p(request):
+    try:
+        with oracledb.connect("python/1234@localhost:1521/xe") as conn:
+            with conn.cursor() as cursor:
+                idx = request.GET['idx']
+                cursor.callproc('memo_delete_p', [idx])
+                conn.commit()
+    except Exception as e:
+        print(e)
+    return redirect('/procedure/list_memo_p')
+
+
+def update_memo_p(request):
+    try:
+        with oracledb.connect("python/1234@localhost:1521/xe") as conn:
+            with conn.cursor() as cursor:
+                idx = request.POST['idx']
+                writer = request.POST['writer']
+                memo = request.POST['memo']
+                cursor.callproc('memo_update_p', [idx, writer, memo])
+                conn.commit()
+    except Exception as e:
+        print(e)
+    return redirect('/procedure/list_memo_p')

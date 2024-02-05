@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax-구구단</title>
+    <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#button1").click(function(){
+                let num=$("#num").val();
+
+                <!-- $.ajax({ url: , data: , success: function(){} });-->
+                $.ajax({
+                    url: "gugu_ajax",
+                    data: {"num":num},
+                    success:function(txt){
+                        console.log(txt);
+                        $("#result").html(txt.result);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h2>동기식</h2>
+<form name="gugu" action="gugu" method="post">
+    {% csrf_token %}
+    number : <input type="text" name="num">
+    <input type="submit" value="확인">
+</form>
+
+<h2>비동기식</h2>
+number :
+<input type="text" id="num">
+<input type="button" id="button1" value="확인">
+<div id="result">결과출력 영역</div>
+</body>
+</html>
