@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     "debug_toolbar",
     # 설문조사 앱추가
     "survey",
+    # 방명록 앱추가
+    "guestbook",
 ]
 
 MIDDLEWARE = [

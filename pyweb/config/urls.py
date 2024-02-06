@@ -33,6 +33,9 @@ urlpatterns = [
 
     path("survey/", include("survey.urls")),
     # 설문조사 실습 관련 url mapping
+
+    path("guestbook/", include("guestbook.urls")),
+    # 방명록 실습 관련 url mapping
 ]
 
 if settings.DEBUG:  # → true=개발중
