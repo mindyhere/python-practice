@@ -36,6 +36,9 @@ urlpatterns = [
 
     path("guestbook/", include("guestbook.urls")),
     # 방명록 실습 관련 url mapping
+
+    path("shop/", include("shop.urls")),
+    # 상품관리 실습 관련 url mapping
 ]
 
 if settings.DEBUG:  # → true=개발중

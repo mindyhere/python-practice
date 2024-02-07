@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     "survey",
     # 방명록 앱추가
     "guestbook",
+    # 상품관리 앱추가
+    "shop",
 ]
 
 MIDDLEWARE = [
