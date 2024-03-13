@@ -36,7 +36,7 @@
         <!-- forEach var="개별변수" items="집합변수" -->
         {% for row in cartList %}
         <tr align="center">
-            <td>{{row.product_name}}</td>
+            <td><span>{{row.product_name}}</span></td>
             <td>{{row.price}}</td>
             <td>
                 <input type="number" style="width:50px;" min="0" max="100" name="amount" value="{{row.amount}}">

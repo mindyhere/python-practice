@@ -12,6 +12,10 @@ def home(request):
         return render(request, 'mymember/main.html')
 
 
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
 def login(request):
     if request.method == "POST":
         userid = request.POST['userid']

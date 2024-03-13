@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h2>게시판</h2>
+    <form method="post">
+        {% csrf_token %}
+        <select name="search_option">
+            {% if search_option == "writer" %}
+            <option value="writer"selected>이름</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="all">이름+제목+내용</option>
+            {% elif search_option == "title" %}
+            <option value="writer">이름</option>
+            <option value="title" selected>제목</option>
+            <option value="content">내용</option>
+            <option value="all">이름+제목+내용</option>
+            {% elif search_option == "content" %}
+            <option value="writer">이름</option>
+            <option value="title">제목</option>
+            <option value="content" selected>내용</option>
+            <option value="all">이름+제목+내용</option>
+            {% else %}
+            <option value="writer">이름</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="all" selected>이름+제목+내용</option>
+            {% endif %}
+        </select>
+        <input name="search" value="{{search}}">
+        <input type="submit" value="검색">
+    </form>
+
+    <a href="write">글쓰기</a>
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>제목</th>
+            <th>날짜</th>
+            <th>조회수</th>
+            <th>첨부파일</th>
+            <th>다운로드</th>
+        </tr>
+        {% for row in boardList %}
+        <tr align="center">
+            <td>{{row.idx}}</td>
+            <td>{{row.writer}}</td>
+            <td><a href="detail?idx={{row.idx}}">{{row.title}}</a></td>
+            <td>{{row.post_date}}</td>
+            <td>{{row.hit}}</td>
+            <td>
+                {% load static %}
+                {% static "" as baseUrl %}
+                {% if row.filesize > 0 %}
+                <a href="download?idx={{row.idx}}"><img src="{{baseUrl}}images/file.png" width="20px" height="20px" align="center"></a>
+                {% endif %}
+            </td>
+            <td>{{row.down}}</td>
+        </tr>
+        {% endfor %}
+
+    <!-- 페이지 네비게이션 -->
+        <tr>
+            <td colspan="7" align="center">
+                {% if start_page >= page_list_size %}
+                <a href="?start={{prev_list}}">[이전]</a>
+                {% endif %}
+                <!-- 페이지 리스트 출력 -->
+                {% autoescape off %}
+                {% for link in links %}
+                    {{link}}
+                {% endfor %}
+                {% endautoescape %}
+                <!-- 다음 페이지 리스트 출력 -->
+                {% if total_page > end_page %}
+                <a href="?start={{next_list}}">[다음]</a>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
