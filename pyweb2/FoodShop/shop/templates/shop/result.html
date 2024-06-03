@@ -1,0 +1,13 @@
+<br>
+<table border="0">
+{% for item in items %}
+    <tr>
+        <td width="50%" bgcolor="white">{{item.query}}</td>
+        {% if item.answer == '' %}
+        <td width="50%" bgcolor="white">{{item.answer}}</td>
+        {% else %}
+        <td width="50%" bgcolor="yellow">{{item.answer}}</td>
+        {% endif %}
+    </tr>
+{% endfor %}
+</table>
